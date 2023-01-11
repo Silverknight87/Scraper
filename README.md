@@ -8,7 +8,7 @@
 pip install Beautifulsoup4 <br>
 pip install requests
 
-3. Once the script is executed and the product price details are output by the script, the next node filter and convert to json.
+3. Once the script is executed and the product price details are output by the script, the next node filter and convert to json. Frequent polling returns a none several times and is filtered. 
 
 4. The function node formats the product and price to send the price to influxdb for visualization.
 
