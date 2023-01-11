@@ -1,0 +1,234 @@
+[
+    {
+        "id": "2bb1f5b7b32a4709",
+        "type": "group",
+        "z": "704041ab.e9cd3",
+        "name": "JBl tune",
+        "style": {
+            "label": true,
+            "fill": "#e3f3d3"
+        },
+        "nodes": [
+            "a58aa0f95f30a3c1",
+            "c0ad1bd1aaaa9c36",
+            "692edbf11cfd5327",
+            "ac17b7ed875546fd",
+            "d485bb2c5fbb54af",
+            "3d19f53128b8286f",
+            "86400455fd644360",
+            "8679f5f3a819f148"
+        ],
+        "x": 14,
+        "y": 19,
+        "w": 1152,
+        "h": 182
+    },
+    {
+        "id": "a58aa0f95f30a3c1",
+        "type": "pythonshell in",
+        "z": "704041ab.e9cd3",
+        "g": "2bb1f5b7b32a4709",
+        "name": "Scraper",
+        "pyfile": "/data/amzn/scraper_2022Jan_v1.py",
+        "virtualenv": "/data/amzn/scaper_env",
+        "continuous": false,
+        "stdInData": false,
+        "x": 360,
+        "y": 100,
+        "wires": [
+            [
+                "3d19f53128b8286f"
+            ]
+        ]
+    },
+    {
+        "id": "c0ad1bd1aaaa9c36",
+        "type": "json",
+        "z": "704041ab.e9cd3",
+        "g": "2bb1f5b7b32a4709",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 670,
+        "y": 60,
+        "wires": [
+            [
+                "692edbf11cfd5327",
+                "86400455fd644360"
+            ]
+        ]
+    },
+    {
+        "id": "692edbf11cfd5327",
+        "type": "function",
+        "z": "704041ab.e9cd3",
+        "g": "2bb1f5b7b32a4709",
+        "name": "Price compare",
+        "func": "if (msg.payload.price < 1198) {\n    var pld = JSON.stringify(msg.payload)\n    msg.payload = {}\n    msg.payload.chatId = -4946402\n    msg.payload.type = \"message\"\n    msg.payload.content = pld \n    return msg; } \nelse \n        return null;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 60,
+        "wires": [
+            [
+                "d485bb2c5fbb54af"
+            ]
+        ]
+    },
+    {
+        "id": "ac17b7ed875546fd",
+        "type": "inject",
+        "z": "704041ab.e9cd3",
+        "g": "2bb1f5b7b32a4709",
+        "name": "JBL Tune BT",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1080",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "26",
+        "topic": "",
+        "payload": "https://www.amazon.in/dp/B08FB2LNSZ/",
+        "payloadType": "str",
+        "x": 140,
+        "y": 60,
+        "wires": [
+            [
+                "a58aa0f95f30a3c1"
+            ]
+        ]
+    },
+    {
+        "id": "d485bb2c5fbb54af",
+        "type": "telegram sender",
+        "z": "704041ab.e9cd3",
+        "g": "2bb1f5b7b32a4709",
+        "name": "Amzn2 bot",
+        "bot": "ca943194b29f3a84",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1050,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3d19f53128b8286f",
+        "type": "function",
+        "z": "704041ab.e9cd3",
+        "g": "2bb1f5b7b32a4709",
+        "name": "Filter None",
+        "func": "if (msg.payload == \"None\") \n    return null;\nelse \n    return msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 60,
+        "wires": [
+            [
+                "c0ad1bd1aaaa9c36"
+            ]
+        ]
+    },
+    {
+        "id": "86400455fd644360",
+        "type": "function",
+        "z": "704041ab.e9cd3",
+        "g": "2bb1f5b7b32a4709",
+        "name": "",
+        "func": "    msg.payload = msg.payload.price\n\n    return msg; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 120,
+        "wires": [
+            [
+                "8679f5f3a819f148"
+            ]
+        ]
+    },
+    {
+        "id": "8679f5f3a819f148",
+        "type": "influxdb out",
+        "z": "704041ab.e9cd3",
+        "g": "2bb1f5b7b32a4709",
+        "influxdb": "c13ec768bcc1f442",
+        "name": "JBLTune-ha10influx",
+        "measurement": "JBLTune",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "matrix",
+        "bucket": "amzn_nodered",
+        "x": 1050,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ca943194b29f3a84",
+        "type": "telegram bot",
+        "botname": "tester2_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "c13ec768bcc1f442",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "ha10",
+        "usetls": false,
+        "tls": "ae2c7c3a.6a704",
+        "influxdbVersion": "2.0",
+        "url": "http://192.168.1.97:8086",
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "ae2c7c3a.6a704",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false
+    }
+]
