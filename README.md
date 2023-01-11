@@ -3,7 +3,7 @@
 
 1. The nodered flow is to invoke the py script (using pythonshell node) in a layman friendly manner and provide the amazon URL as input. 
 
-2. Requirements need to be installed separately. Installed in venv (See tutorials in youtube) and venv path specific in pythonshell node. /data is the nodered root directly in my case. 
+2. Requirements need to be installed separately. Installed in venv (See tutorials in youtube) and venv path specified in pythonshell node. /data is the nodered root directly in my case. 
 
 pip install Beautifulsoup4 <br>
 pip install requests
