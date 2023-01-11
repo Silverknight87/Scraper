@@ -97,24 +97,15 @@ def get_product_details(url):
 #         print(get_product_details(x))
 
 # print(get_product_details("https://www.amazon.in/dp/B08FB2LNSZ"))
+
+#Running script via pythonshell node on Node-red
 print(get_product_details(sys.argv[1]))
-
-
-# mqtt stuff
-# Output=get_product_details("https://www.amazon.in/gp/product/B07RRMPZ4L")
-#
-# client.publish("scraper/data",Output)
 
 
 
 
 # get_data()
-#print(get_product_details("https://www.amazon.in/Harpic-Original-Powerplus-Pack/dp/B016D3J92M"))
-
+#print(get_product_details("https://www.amazon.in/Harpic-Original-Powerplus-Pack/dp/xxxxxxxxx"))
 #   productTitle
-
-
 # priceblock_ourprice
-
-
 # id=“priceblock_dealprice”
