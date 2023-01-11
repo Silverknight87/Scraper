@@ -5,7 +5,7 @@
 
 2. Requirements need to be installed separately. Installed in venv (See tutorials in youtube) and venv path specific in pythonshell node. /data is the nodered root directly in my case. 
 
-pip install Beautifulsoup4
+pip install Beautifulsoup4 /n
 pip install requests
 
 3. Once the script is executed and the product price details are output by the script, the next node filter and convert to json.
